@@ -1,8 +1,10 @@
+import 'package:currencyApp/widgets/chart.dart';
 import 'package:currencyApp/widgets/new_transaction.dart';
 import 'package:currencyApp/widgets/transaction_list.dart';
 import 'package:currencyApp/widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 import './models/transaction.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +15,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+         textTheme: ThemeData.light().textTheme.copyWith(
+            title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Colors.purple,
+            )
+          ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+            title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            )
+          )
+        )
+      ),
       debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       home: MyHomePage(),
@@ -29,16 +53,24 @@ class _MyHomePageState extends State<MyHomePage> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   final List<Transaction> _usertransactions = [
-    Transaction(
+    /*Transaction(
       id: 't1',
       title: 'New Shoes',
       amount: 75.6,
       date: DateTime.now(),
     ),
     Transaction(
-        id: 't1', title: 'New Socks', amount: 15.6, date: DateTime.now()),
+        id: 't1', title: 'New Socks', amount: 15.6, date: DateTime.now()),*/
   ];
-
+  List<Transaction> get _recentTransactions{
+    return _usertransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
         title: txTitle,
@@ -78,14 +110,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
+           /* Container(
               width: double.infinity,
               child: Card(
                 color: Colors.yellow,
                 child: Text('CHART!'),
                 elevation: 2,
               ),
-            ),
+            ),*/
+            Chart(_recentTransactions),
             TransactionList(_usertransactions),
           ],
         ),
