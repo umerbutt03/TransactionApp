@@ -1,7 +1,6 @@
 import 'package:currencyApp/widgets/chart.dart';
 import 'package:currencyApp/widgets/new_transaction.dart';
 import 'package:currencyApp/widgets/transaction_list.dart';
-import 'package:currencyApp/widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 import './models/transaction.dart';
 import 'dart:async';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'OpenSans',
               fontSize: 15,
               fontWeight: FontWeight.bold,
-              color: Colors.purple,
+              color: Colors.blue,
             )
           ),
         appBarTheme: AppBarTheme(

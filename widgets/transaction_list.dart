@@ -1,8 +1,6 @@
-import 'package:currencyApp/widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
-import './user_transactions.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
