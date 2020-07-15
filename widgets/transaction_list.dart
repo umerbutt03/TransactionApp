@@ -13,46 +13,25 @@ class TransactionList extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (ctx, index) {
           return Card(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      //color: Colors.purple,
-                      color: Theme.of(context).primaryColorDark,
-                      width: 3,
-                    ),
-                  ),
-                  padding: EdgeInsets.all(15),
-                  child: Text(
-                    transactions[index].amount.toStringAsFixed(2) + ' ' + '\$',
-                    //'\$${tx.amount}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      // color: Colors.purple,
-                      color: Theme.of(context).primaryColorDark,
-                    ),
-                  ),
-                ),
-                Column(children: <Widget>[
-                  Text(
-                    transactions[index].title,
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                  //Text(tx.id),
-                  Text(
-                    //tx.date.toString(),
-                    //DateFormat('h:m:s').format(tx.date),
-                    DateFormat.yMMMMd().format(transactions[index].date),
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                ]),
-              ],
+            elevation: 5,
+            margin: EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 5,
+            ),
+            child: ListTile(
+              leading: CircleAvatar(
+                  radius: 30,
+                  child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: FittedBox(
+                          child: Text('\$${transactions[index].amount}')))),
+              title: Text(
+                transactions[index].title,
+                style: Theme.of(context).textTheme.title,
+              ),
+              subtitle: Text(
+                DateFormat.yMMMd().format(transactions[index].date),
+              ),
             ),
           );
         },
